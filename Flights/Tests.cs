@@ -71,9 +71,16 @@ namespace Flights
             var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
             var usernameTitle = FlightsMainWindow.Get(SearchCriteria.ByAutomationId("usernameTitle"));
 
-            Assert.IsTrue(expectedValuePositive == usernameTitle.Name); 
+            Assert.IsTrue(expectedValuePositive == usernameTitle.Name);
 
+            var tabs = FlightsMainWindow.Get<Tab>(SearchCriteria.ByControlType(ControlType.Tab));
+            tabs.SelectTabPage("SEARCH ORDER");
 
+            var radioBtn_orderNumber = FlightsMainWindow.Get<RadioButton>(SearchCriteria.ByAutomationId("byNumberRadio"));
+            radioBtn_orderNumber.Click();
+
+            var btn_SEARCH = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId("searchBtn"));
+            Assert.IsTrue(!btn_SEARCH.Enabled);
         }
 
    
@@ -87,7 +94,7 @@ namespace Flights
             Thread.Sleep(2500);
         }
 
-        [TearDown]
+        //[TearDown]
         public void StopApplication()
         {
             Thread.Sleep(1000);
@@ -132,8 +139,7 @@ namespace Flights
 
 
 
-//var tab_SEARCH_ORDER = FlightsMainWindow.Get<Tab>(SearchCriteria.Indexed(1));
-//tab_SEARCH_ORDER.Click();
+//
 
 
 
