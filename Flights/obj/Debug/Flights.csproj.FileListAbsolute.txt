@@ -1,0 +1,22 @@
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\bin\Debug\Flights.dll
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\bin\Debug\Flights.pdb
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\bin\Debug\nunit.framework.dll
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\bin\Debug\nunit.framework.xml
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\obj\Debug\Flights.dll
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\obj\Debug\Flights.pdb
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\bin\Debug\Castle.Core.dll
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\bin\Debug\TestStack.White.dll
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\bin\Debug\Castle.Core.xml
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\bin\Debug\TestStack.White.pdb
+c:\users\sg\documents\visual studio 2013\Projects\Flights\Flights\bin\Debug\TestStack.White.xml
+D:\FlightsAutomation\Flights\bin\Debug\Flights.dll
+D:\FlightsAutomation\Flights\bin\Debug\Flights.pdb
+D:\FlightsAutomation\Flights\bin\Debug\Castle.Core.dll
+D:\FlightsAutomation\Flights\bin\Debug\nunit.framework.dll
+D:\FlightsAutomation\Flights\bin\Debug\TestStack.White.dll
+D:\FlightsAutomation\Flights\bin\Debug\Castle.Core.xml
+D:\FlightsAutomation\Flights\bin\Debug\nunit.framework.xml
+D:\FlightsAutomation\Flights\bin\Debug\TestStack.White.pdb
+D:\FlightsAutomation\Flights\bin\Debug\TestStack.White.xml
+D:\FlightsAutomation\Flights\obj\Debug\Flights.dll
+D:\FlightsAutomation\Flights\obj\Debug\Flights.pdb
