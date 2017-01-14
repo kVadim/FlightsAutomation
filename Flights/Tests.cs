@@ -56,7 +56,7 @@ namespace Flights
        }
 
         [Test]
-        public void searchOrderCheck()
+        public void searchButtonAvailability()
         {
             string expectedValuePositive = "John Smith";
             var FlightsLoginDialog = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
@@ -83,6 +83,30 @@ namespace Flights
             Assert.IsTrue(!btn_SEARCH.Enabled);
         }
 
+        [Test]
+        public void orderNumberAvailability()
+        {
+            string expectedValuePositive = "John Smith";
+            var FlightsLoginDialog = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
+            var textBox_Name = FlightsLoginDialog.Get<TextBox>(SearchCriteria.ByAutomationId("agentName"));
+            var textBox_Password = FlightsLoginDialog.Get<TextBox>(SearchCriteria.ByAutomationId("password"));
+            var btn_OK = FlightsLoginDialog.Get<Button>(SearchCriteria.ByAutomationId("okButton"));
+
+            textBox_Name.SetValue("john");
+            textBox_Password.SetValue("hp");
+            btn_OK.Click();
+
+            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
+            var usernameTitle = FlightsMainWindow.Get(SearchCriteria.ByAutomationId("usernameTitle"));
+
+            Assert.IsTrue(expectedValuePositive == usernameTitle.Name);
+
+            var tabs = FlightsMainWindow.Get<Tab>(SearchCriteria.ByControlType(ControlType.Tab));
+            tabs.SelectTabPage("SEARCH ORDER");
+
+            var textBox_orderNumber = FlightsMainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("byNumberWatermark"));
+            Assert.IsTrue(!textBox_orderNumber.Enabled);
+        }
    
 
 
