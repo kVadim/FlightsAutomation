@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Automation;
 using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
@@ -32,6 +33,25 @@ namespace Flights.Actions
             var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
             var btn_SEARCH = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId("searchBtn"));
             btn_SEARCH.Click();
+        }
+
+        public static bool CheckOrderDetails()
+        {
+            return true;
+        }
+
+        public static void DeleteOrder()
+        {
+            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
+            var btn_DeleteOrder = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId(""));
+            btn_DeleteOrder.Click();
+        }
+
+        public static string DeleteOrderNumber()
+        {
+            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
+            var label_OrderDeleted = FlightsMainWindow.Get<Label>(SearchCriteria.ByAutomationId("orderDeleted"));
+            return label_OrderDeleted.Name;
         }
 
         public static void EnableNameOrDate()

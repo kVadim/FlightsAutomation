@@ -24,7 +24,7 @@ namespace Flights
         public const string ProcessName = "FlightsGUI";
     }
 
-    public static class ErrorMsg
+    public static class ExpectedMsg
     {
         //orderNumber errors
         public const string onlyNubmers = "Enter a number.";
@@ -33,7 +33,10 @@ namespace Flights
 
         //login errors
         public const string wrongCredentials = "Incorrect username or password.\r\nUse: Username=john, Password=HP";
-        public const string tooShortUsername = "Username must be at least 4 characters long";       
+        public const string tooShortUsername = "Username must be at least 4 characters long";
+
+        //notifications
+        public const string confirmToDelete = "Are you sure you want to delete this order?";
     }
 
    
