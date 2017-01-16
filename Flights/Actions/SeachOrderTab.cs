@@ -45,13 +45,19 @@ namespace Flights.Actions
             var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
             var btn_DeleteOrder = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId(""));
             btn_DeleteOrder.Click();
+            Thread.Sleep(1000);
         }
 
         public static string DeleteOrderNumber()
         {
+            Thread.Sleep(500);
             var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
             var label_OrderDeleted = FlightsMainWindow.Get<Label>(SearchCriteria.ByAutomationId("orderDeleted"));
-            return label_OrderDeleted.Name;
+            string OrderDeleted = label_OrderDeleted.Name;        
+            char[] _splitchar = { ' ' };
+            string[] OrderDeletedArrow = OrderDeleted.Split(_splitchar);
+            string orderNumber = OrderDeletedArrow[1];
+            return orderNumber;
         }
 
         public static void EnableNameOrDate()

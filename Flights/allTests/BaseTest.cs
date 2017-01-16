@@ -13,7 +13,7 @@ namespace Flights.allTests
             Navigate.StartApp();
         }
 
-        //[TearDown]
+        [TearDown]
         public void StopApplication()
         {
             Navigate.CloseApp();

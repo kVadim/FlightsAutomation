@@ -16,9 +16,10 @@ namespace Flights.Actions
 {
     public static class Navigate
     {
+        public static bool LogedIn = false;
         public static bool login(string name = "john", string password = "hp")
         {
-            bool OK_btn_isClicked=false;
+            //bool OK_btn_isClicked=false;
 
             var FlightsLoginDialog = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
             var textBox_Name = FlightsLoginDialog.Get<TextBox>(SearchCriteria.ByAutomationId("agentName"));
@@ -30,15 +31,18 @@ namespace Flights.Actions
             if (btn_OK.Enabled)
             {
                 btn_OK.Click();
-                OK_btn_isClicked = true;
+                LogedIn = true;
             }
-            return OK_btn_isClicked;
+            return LogedIn;
         }
 
 
         public static void OpenSearchTab()
         {
-            login();
+            if (!LogedIn)
+            {
+                login();
+            }
             var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
             var usernameTitle = FlightsMainWindow.Get(SearchCriteria.ByAutomationId("usernameTitle"));
             var tabs = FlightsMainWindow.Get<Tab>(SearchCriteria.ByControlType(ControlType.Tab));
@@ -50,6 +54,7 @@ namespace Flights.Actions
         {
             var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
             FlightsMainWindow.Close();
+            LogedIn = false;
         }
 
 
