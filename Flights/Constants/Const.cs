@@ -21,6 +21,7 @@ namespace Flights
     public static class AppParameters
     {
         public const string PATH = "D:\\ADM Automation\\ADM exam task\\ADM exam task GUI\\Flights Application\\FlightsGUI.exe";
+     // public const string PATH = "D:\\Flights Application\\FlightsGUI.exe"; 
         public const string ProcessName = "FlightsGUI";
     }
 

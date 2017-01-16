@@ -14,8 +14,8 @@ namespace Flights.Actions
        
         public static List<string> generateOrderData()
         {
-            var classRates = new List<string> { "Economy", "Business", "First" };
-            var cities = new List<string> { "Denver", "Frankfurt", "London", "Los Angeles", "Paris", "Portland", "San Francisco", "Seattle", "Zurich", "Sydney" };
+            List<string> classRates = new List<string> { "Economy", "Business", "First" };
+            List<string> cities = new List<string> { "Denver", "Frankfurt", "London", "Los Angeles", "Paris", "Portland", "San Francisco", "Seattle", "Zurich", "Sydney" };
 
             Random rnd = new Random();
             string fromCity, toCity;
@@ -50,17 +50,13 @@ namespace Flights.Actions
             string classRate = orderData[3];
             string numOfTickets = orderData[4];
 
-            //populateData();
-            //selectRandomFlight();
-
-
             var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            var cmb_fromCity = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("fromCity"));
-            var cmb_toCity = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("toCity"));
-            var cmb_class = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("Class"));
-            var cmb_numOfTickets = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("numOfTickets"));
-            var textBox_Date = FlightsMainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("PART_TextBox"));
-            var btn_findFlights = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId(""));
+            ComboBox cmb_fromCity = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("fromCity"));
+            ComboBox cmb_toCity = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("toCity"));
+            ComboBox cmb_class = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("Class"));
+            ComboBox cmb_numOfTickets = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("numOfTickets"));
+            TextBox textBox_Date = FlightsMainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("PART_TextBox"));
+            Button btn_findFlights = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId(""));
 
 
             cmb_fromCity.Click();
@@ -96,8 +92,8 @@ namespace Flights.Actions
             btn_findFlights.Click();
 
             var SelectFlightsWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            var btn_selectFlight = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId("selectFlightBtn"));
-            var flights = FlightsMainWindow.Get<ListView>(SearchCriteria.ByAutomationId("flightsDataGrid"));
+            Button btn_selectFlight = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId("selectFlightBtn"));
+            ListView flights = FlightsMainWindow.Get<ListView>(SearchCriteria.ByAutomationId("flightsDataGrid"));
             
              Random rnd = new Random();
              var firstFlight = flights.Rows[rnd.Next(flights.Rows.Count)];  
@@ -106,8 +102,8 @@ namespace Flights.Actions
             btn_selectFlight.Click();
 
             var FlightsDetailsWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            var textBox_PassengerName = FlightsDetailsWindow.Get<TextBox>(SearchCriteria.ByAutomationId("passengerName"));
-            var btn_Order = FlightsDetailsWindow.Get<Button>(SearchCriteria.ByAutomationId("orderBtn"));
+            TextBox textBox_PassengerName = FlightsDetailsWindow.Get<TextBox>(SearchCriteria.ByAutomationId("passengerName"));
+            Button btn_Order = FlightsDetailsWindow.Get<Button>(SearchCriteria.ByAutomationId("orderBtn"));
 
 
 
@@ -115,13 +111,13 @@ namespace Flights.Actions
             btn_Order.Click();
 
             Thread.Sleep(1500);
-            var label_OrderCompleted = FlightsDetailsWindow.Get<Label>(SearchCriteria.ByAutomationId("orderCompleted"));
+            Label label_OrderCompleted = FlightsDetailsWindow.Get<Label>(SearchCriteria.ByAutomationId("orderCompleted"));
             string OrderCompleted = label_OrderCompleted.Name;
             char[] _splitchar = { ' ' };
             string[] OrderCompletedArrow = OrderCompleted.Split(_splitchar);
             string orderNumber = OrderCompletedArrow[1];
 
-            var btn_NewSearch = FlightsDetailsWindow.Get<Button>(SearchCriteria.ByAutomationId("newSearchBtn"));
+            Button btn_NewSearch = FlightsDetailsWindow.Get<Button>(SearchCriteria.ByAutomationId("newSearchBtn"));
             btn_NewSearch.Click();
 
             return orderNumber;
