@@ -43,12 +43,12 @@ namespace Flights
                 //assert is opened
                 //Assert.IsTrue(SeachOrderTab.CheckOrderDetails()); // not implemented
                 SeachOrderTab.DeleteOrder();
-                Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete));
+                Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete), "incorrect Error message");
                 string deletedOrderNumber = SeachOrderTab.DeleteOrderNumber();
                 deletedOrders.Add(deletedOrderNumber);
             }
 
-            Assert.IsTrue(createdOrders == deletedOrders);  //  not implemented
+                Assert.IsTrue(createdOrders.SequenceEqual(deletedOrders), "not all orders deleted"); 
 
 
         }
