@@ -7,6 +7,7 @@ using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using Flights.Actions;
 using Flights.allTests;
+using System.Collections.Generic;
 
 namespace Flights
 {
@@ -15,37 +16,40 @@ namespace Flights
     {       
 
         [Test]
-        public void E2E()
+        public void E2E([Values(3)]int iter) //number of orders to be created
         {
-            //Random rnd = new Random();
-            //string[] Cities = new string[] { "Denver", "Frankfurt", "London", "Los Angeles", "Portland" "Paris", "Sydney" };
+            Navigate.login(); //to some tab
 
-            //for (int i = 1; 1 < 4; i++ )
-            //{
-            //    int randomItem1 = rnd.Next(0, Cities.Length - 1);
-            //    int randomItem2 = rnd.Next(0, Cities.Length - 1);
-            //    string orderNumber1 = Orders.CreateOrder(Cities[randomItem1], Cities[randomItem2]);
-            //}
+            List<string> createdOrders = new List<string>();
+            List<string> deletedOrders = new List<string>();
 
-
-
-            Navigate.login();
-            string orderNumber1 = Orders.CreateOrder("Frankfurt", "Sydney");
-            //string orderNumber2 = Orders.CreateOrder("London", "Paris");
-            //string orderNumber3 = Orders.CreateOrder("Portland", "Denver");
-            //Console.WriteLine(orderNumber1, orderNumber2, orderNumber3);
+            for (int i = 1; i <= iter; i++)
+            {
+                Dictionary<string, string> RandomDataForOrder = Orders.generateOrderData();
+                string currentOrderNumber = Orders.CreateOrder(RandomDataForOrder);
+                createdOrders.Add(currentOrderNumber);
+            }
 
             Navigate.CloseApp();
             Navigate.StartApp();
             Navigate.OpenSearchTab();
             SeachOrderTab.EnableOrderNumberSearch();
-            SeachOrderTab.SetOrderNumber("95");
-            SeachOrderTab.Search();
-            //assert is opened
-            Assert.IsTrue(SeachOrderTab.CheckOrderDetails());
-            SeachOrderTab.DeleteOrder();
-            Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete));
-            string deletedOrderNumber = SeachOrderTab.DeleteOrderNumber();
+
+            for (int i = 1; i < iter; i++)
+            {
+                SeachOrderTab.SetOrderNumber(createdOrders[i-1]);
+                SeachOrderTab.Search();
+                //assert is opened
+                Assert.IsTrue(SeachOrderTab.CheckOrderDetails());
+                SeachOrderTab.DeleteOrder();
+                Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete));
+                string deletedOrderNumber = SeachOrderTab.DeleteOrderNumber();
+                deletedOrders.Add(deletedOrderNumber);
+            }
+
+            Assert.IsTrue(createdOrders == deletedOrders);
+
+
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using TestStack.White;
 using TestStack.White.UIItems;
@@ -87,5 +89,50 @@ namespace Flights.Actions
            
         }
 
+        public static Dictionary<string, string> generateOrderData()
+        {
+            var classRates = new List<string> { "Economy", "Business", "First" };
+            var cities = new List<string> { "Denver", "Frankfurt", "London", "Los Angeles", "Paris", "Portland", "San Francisco", "Seattle", "Zurich", "Sydney" };
+
+            Random rnd = new Random();
+            while (true)
+            {
+                string fromCity = cities[rnd.Next(cities.Count)];
+                string toCity = cities[rnd.Next(cities.Count)];
+                if (fromCity != toCity)
+                break;          
+            }
+
+           
+            string date = cities[rnd.Next(cities.Count)];
+            string classRate = cities[rnd.Next(classRates.Count)];
+            string numOfTickets = rnd.Next(1, 99).ToString();
+
+            Dictionary<string, string> order = new Dictionary<string, string>();
+            order.Add("fromCity", fromCity);
+            order.Add("toCity", toCity);
+            order.Add("date", "16.01.2017");
+            order.Add("class", classRate);
+            order.Add("numOfTickets", numOfTickets);
+
+            string[] Cities = new string[] { "Denver", "Frankfurt", "London", "Los Angeles", "Portland", "Paris", "Sydney" };
+            return order;
+        }
+        public static string CreateOrder(Dictionary<string, string> randomOrder)
+        {
+
+            return "";
+        }
     }
 }
+
+
+
+//string[] Cities = new string[] { "Denver", "Frankfurt", "London", "Los Angeles", "Portland" "Paris", "Sydney" };
+
+//for (int i = 1; 1 < 4; i++ )
+//{
+//    int randomItem1 = rnd.Next(0, Cities.Length - 1);
+//    int randomItem2 = rnd.Next(0, Cities.Length - 1);
+//    string orderNumber1 = Orders.CreateOrder(Cities[randomItem1], Cities[randomItem2]);
+//}
