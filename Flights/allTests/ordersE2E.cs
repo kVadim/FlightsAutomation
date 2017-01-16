@@ -25,8 +25,8 @@ namespace Flights
 
             for (int i = 1; i <= iter; i++)
             {
-                Dictionary<string, string> RandomDataForOrder = Orders.generateOrderData();
-                string currentOrderNumber = Orders.CreateOrder(RandomDataForOrder);
+                List<string> RandomDataForOrder = Orders.generateOrderData();
+                string currentOrderNumber = Orders.CreateOrder(RandomDataForOrder, "passanger" + i.ToString());
                 createdOrders.Add(currentOrderNumber);
             }
 
