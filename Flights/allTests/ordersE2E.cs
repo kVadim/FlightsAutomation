@@ -44,6 +44,8 @@ namespace Flights
                 SeachOrderTab.Search();
                 //assert is opened
                 //Assert.IsTrue(SeachOrderTab.CheckOrderDetails()); // not implemented
+                List<string> currentlyOpenedOrderDetails =  SeachOrderTab.GetOpenedOrderDetails();
+                Assert.IsTrue( Orders.compareCreatedAndActualOrders(currentlyOpenedOrderDetails, createdOrders[i - 1], i)); 
                 SeachOrderTab.DeleteOrder();
                 Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete), "incorrect Error message");
                 string deletedOrderNumber = SeachOrderTab.DeleteOrderNumber();
