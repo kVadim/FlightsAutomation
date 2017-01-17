@@ -126,10 +126,17 @@ namespace Flights.Actions
 
         public static bool compareCreatedAndActualOrders(List<string> currentlyOpened, List<string> created ,int iter)
         {
-            Assert.AreEqual(currentlyOpened[0], created[0].Substring(0,3));
-            Assert.AreEqual(currentlyOpened[1], created[1].Substring(0, 3));
-            Assert.AreEqual(currentlyOpened[2], created[2]);
-            Assert.AreEqual(currentlyOpened[3], created[3]); //not implemented
+            string f1 = currentlyOpened[0].ToLower();
+            string f2 = currentlyOpened[1].ToLower();
+            string f3 = currentlyOpened[2];
+            string f4 = created[0].Substring(0, 3).ToLower();
+            string f = created[1].Substring(0, 3).ToLower();
+            string ff = String.Format("{0:dd MMM}", created[2]);
+
+            Assert.AreEqual(currentlyOpened[0].ToLower(), created[0].Substring(0, 3).ToLower());
+            Assert.AreEqual(currentlyOpened[1].ToLower(), created[1].Substring(0, 3).ToLower());
+         //   Assert.AreEqual(currentlyOpened[2], String.Format("{0:dd MMM}", created[2]));
+            Assert.AreEqual(currentlyOpened[3], created[3]); 
             Assert.AreEqual(currentlyOpened[4], created[4]);
             Assert.AreEqual(currentlyOpened[5], "passenger"+iter.ToString());
             return true;
