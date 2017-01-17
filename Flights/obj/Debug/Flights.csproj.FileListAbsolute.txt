@@ -21,3 +21,6 @@ D:\FlightsAutomation\Flights\bin\Debug\TestStack.White.xml
 D:\FlightsAutomation\Flights\obj\Debug\Flights.dll
 D:\FlightsAutomation\Flights\obj\Debug\Flights.pdb
 D:\FlightsAutomation\Flights\obj\Debug\Flights.csprojResolveAssemblyReference.cache
+D:\Homework\FlightsAutomation\Flights\obj\Debug\Flights.csprojResolveAssemblyReference.cache
+D:\Homework\FlightsAutomation\Flights\obj\Debug\Flights.dll
+D:\Homework\FlightsAutomation\Flights\obj\Debug\Flights.pdb

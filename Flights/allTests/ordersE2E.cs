@@ -48,9 +48,7 @@ namespace Flights
                 deletedOrders.Add(deletedOrderNumber);
             }
 
-            Assert.IsTrue(createdOrders == deletedOrders);  //  not implemented
-
-
+            Assert.IsTrue(createdOrders.SequenceEqual(deletedOrders)); 
         }
     }
 }
