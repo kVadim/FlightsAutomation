@@ -21,7 +21,7 @@ namespace Flights.allTests
                                 )
         {
             Navigate.login(name, password);
-            Assert.IsTrue(ModalWindow.checkMessageAndClose(errorMessage));
+            Assert.IsTrue(ModalWindow.checkMessageAndClose(errorMessage), "incorrect Error message");
         }
 
 
@@ -34,7 +34,7 @@ namespace Flights.allTests
             var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
             var usernameTitle = FlightsMainWindow.Get(SearchCriteria.ByAutomationId("usernameTitle"));
 
-            Assert.IsTrue(expectedValuePositive == usernameTitle.Name);
+            Assert.IsTrue(expectedValuePositive == usernameTitle.Name, "failed to login");
             
         }
 
@@ -45,7 +45,7 @@ namespace Flights.allTests
                                     [Values("",     "hp")]string password
                                     )
         {
-            Assert.IsTrue(!Navigate.login(name, password));
+            Assert.IsTrue(!Navigate.login(name, password), "button OK isn't disbled");
 
         }
     }

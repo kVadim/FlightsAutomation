@@ -20,14 +20,16 @@ namespace Flights
         {
             Navigate.login(); //to some tab
 
-            List<string> createdOrders = new List<string>();
-            List<string> deletedOrders = new List<string>();
+            List<List<string>> createdOrders = new List<List<string>>();
+            List<string> createdOrdersNumbers = new List<string>();
+            List<string> deletedOrdersNumbers = new List<string>();
 
             for (int i = 1; i <= iter; i++)
             {
                 List<string> RandomDataForOrder = Orders.generateOrderData();
                 string currentOrderNumber = Orders.CreateOrder(RandomDataForOrder, "passanger" + i.ToString());
-                createdOrders.Add(currentOrderNumber);
+                createdOrdersNumbers.Add(currentOrderNumber);
+                createdOrders.Add(RandomDataForOrder);
             }
 
             Navigate.CloseApp();
@@ -38,17 +40,19 @@ namespace Flights
             {
                 Navigate.OpenSearchTab();
                 SeachOrderTab.EnableOrderNumberSearch();
-                SeachOrderTab.SetOrderNumber(createdOrders[i-1]);
+                SeachOrderTab.SetOrderNumber(createdOrdersNumbers[i-1]);
                 SeachOrderTab.Search();
                 //assert is opened
                 //Assert.IsTrue(SeachOrderTab.CheckOrderDetails()); // not implemented
                 SeachOrderTab.DeleteOrder();
-                Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete));
+                Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete), "incorrect Error message");
                 string deletedOrderNumber = SeachOrderTab.DeleteOrderNumber();
-                deletedOrders.Add(deletedOrderNumber);
+                deletedOrdersNumbers.Add(deletedOrderNumber);
             }
 
-            Assert.IsTrue(createdOrders.SequenceEqual(deletedOrders)); 
+                Assert.IsTrue(createdOrdersNumbers.SequenceEqual(deletedOrdersNumbers), "not all orders deleted"); 
+
+
         }
     }
 }
