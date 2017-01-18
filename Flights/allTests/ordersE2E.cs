@@ -14,7 +14,7 @@ namespace Flights
     [TestFixture]
     public class End2End: BaseTest
     {       
-
+        // validation + log + sessions
         [Test]
         public void E2E([Values(2)]int iter) //number of orders to be created
         {
