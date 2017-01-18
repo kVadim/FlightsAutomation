@@ -21,3 +21,15 @@ D:\FlightsAutomation\Flights\bin\Debug\TestStack.White.xml
 D:\FlightsAutomation\Flights\obj\Debug\Flights.dll
 D:\FlightsAutomation\Flights\obj\Debug\Flights.pdb
 D:\FlightsAutomation\Flights\obj\Debug\Flights.csprojResolveAssemblyReference.cache
+D:\Homework\FlightsAutomation\Flights\obj\Debug\Flights.csprojResolveAssemblyReference.cache
+D:\Homework\FlightsAutomation\Flights\obj\Debug\Flights.dll
+D:\Homework\FlightsAutomation\Flights\obj\Debug\Flights.pdb
+D:\Homework\FlightsAutomation\Flights\bin\Debug\Flights.dll
+D:\Homework\FlightsAutomation\Flights\bin\Debug\Flights.pdb
+D:\Homework\FlightsAutomation\Flights\bin\Debug\Castle.Core.dll
+D:\Homework\FlightsAutomation\Flights\bin\Debug\nunit.framework.dll
+D:\Homework\FlightsAutomation\Flights\bin\Debug\TestStack.White.dll
+D:\Homework\FlightsAutomation\Flights\bin\Debug\Castle.Core.xml
+D:\Homework\FlightsAutomation\Flights\bin\Debug\nunit.framework.xml
+D:\Homework\FlightsAutomation\Flights\bin\Debug\TestStack.White.pdb
+D:\Homework\FlightsAutomation\Flights\bin\Debug\TestStack.White.xml

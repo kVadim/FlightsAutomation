@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -121,6 +122,24 @@ namespace Flights.Actions
             btn_NewSearch.Click();
 
             return orderNumber;
+        }
+
+        public static bool compareCreatedAndActualOrders(List<string> currentlyOpened, List<string> created ,int iter)
+        {
+            string f1 = currentlyOpened[0].ToLower();
+            string f2 = currentlyOpened[1].ToLower();
+            string f3 = currentlyOpened[2];
+            string f4 = created[0].Substring(0, 3).ToLower();
+            string f = created[1].Substring(0, 3).ToLower();
+            string ff = String.Format("{0:dd MMM}", created[2]);
+
+            Assert.AreEqual(currentlyOpened[0].ToLower(), created[0].Substring(0, 3).ToLower());
+            Assert.AreEqual(currentlyOpened[1].ToLower(), created[1].Substring(0, 3).ToLower());
+         //   Assert.AreEqual(currentlyOpened[2], String.Format("{0:dd MMM}", created[2]));
+            Assert.AreEqual(currentlyOpened[3], created[3]); 
+            Assert.AreEqual(currentlyOpened[4], created[4]);
+            Assert.AreEqual(currentlyOpened[5], "passenger"+iter.ToString());
+            return true;
         }
     }
 
