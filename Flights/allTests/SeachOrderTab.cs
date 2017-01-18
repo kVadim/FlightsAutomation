@@ -11,21 +11,21 @@ namespace Flights
         public void searchButtonAvailability()
          {
             Navigate.OpenSearchTab();
-            SeachOrderTab.EnableOrderNumberSearch();
-            SeachOrderTab.SetOrderNumber("123");
-            Assert.IsTrue(SeachOrderTab.isSearchButtonEnabled());
-            SeachOrderTab.SetOrderNumber("");
-            Assert.IsTrue(!SeachOrderTab.isSearchButtonEnabled());
+            SearchOrderTab.EnableOrderNumberSearch();
+            SearchOrderTab.SetOrderNumber("123");
+            Assert.IsTrue(SearchOrderTab.isSearchButtonEnabled());
+            SearchOrderTab.SetOrderNumber("");
+            Assert.IsTrue(!SearchOrderTab.isSearchButtonEnabled());
         }
 
         [Test]
         public void orderNumberAvailability()
         {
             Navigate.OpenSearchTab();
-            SeachOrderTab.EnableOrderNumberSearch();
-            Assert.IsTrue(SeachOrderTab.isOrderNumberEnabled());
-            SeachOrderTab.EnableNameOrDateSearch();
-            Assert.IsTrue(!SeachOrderTab.isOrderNumberEnabled());
+            SearchOrderTab.EnableOrderNumberSearch();
+            Assert.IsTrue(SearchOrderTab.isOrderNumberEnabled());
+            SearchOrderTab.EnableNameOrDateSearch();
+            Assert.IsTrue(!SearchOrderTab.isOrderNumberEnabled());
         }
 
 
@@ -36,9 +36,9 @@ namespace Flights
                                         )
         {
             Navigate.OpenSearchTab();
-            SeachOrderTab.EnableOrderNumberSearch();
-            SeachOrderTab.SetOrderNumber(orderNumber);
-            SeachOrderTab.startSearch();
+            SearchOrderTab.EnableOrderNumberSearch();
+            SearchOrderTab.SetOrderNumber(orderNumber);
+            SearchOrderTab.startSearch();
 
             Assert.IsTrue(ModalWindow.checkMessageAndClose(errorMessage));
         }

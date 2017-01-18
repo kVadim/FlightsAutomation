@@ -53,12 +53,13 @@
     <Compile Include="Actions\Navigate.cs" />
     <Compile Include="Actions\Orders.cs" />
     <Compile Include="Actions\ModalWindows.cs" />
-    <Compile Include="Actions\SeachOrderTab.cs" />
+    <Compile Include="Actions\SearchOrderTab.cs" />
     <Compile Include="allTests\BaseTest.cs" />
     <Compile Include="allTests\LoginPage.cs" />
     <Compile Include="allTests\OrdersE2E.cs" />
     <Compile Include="allTests\SeachOrderTab.cs" />
     <Compile Include="Constants\Const.cs" />
+    <Compile Include="Constants\Element Locators.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

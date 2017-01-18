@@ -26,7 +26,8 @@ namespace Flights
                 List<string> flightDetails = Orders.SelectRandomFlight();
 
                 string actualFromCity = flightDetails[0];
-                Assert.IsTrue(RandomDataForOrder[0].Equals(actualFromCity), "incorrect city FROM. Iter: " + i);
+                Assert.IsTrue(RandomDataForOrder[0].Equals(actualFromCity), "incorrect city FROM. Iter: " +
+                    i + ", expected: " + RandomDataForOrder[0] + " actual: " + actualFromCity);
 
                 string actualToCity = flightDetails[1];
                 Assert.IsTrue(RandomDataForOrder[1].Equals(actualToCity), "incorrect city TO. Iter: " + i);
@@ -51,10 +52,10 @@ namespace Flights
             for (int i = 1; i <= iter; i++)
             {
                 Navigate.OpenSearchTab();
-                SeachOrderTab.EnableOrderNumberSearch();
-                SeachOrderTab.SetOrderNumber(createdOrders[i - 1][7]);
-                SeachOrderTab.startSearch();
-                List<string> openedOrderDetails = SeachOrderTab.GetOpenedOrderDetails();
+                SearchOrderTab.EnableOrderNumberSearch();
+                SearchOrderTab.SetOrderNumber(createdOrders[i - 1][7]);
+                SearchOrderTab.startSearch();
+                List<string> openedOrderDetails = SearchOrderTab.GetOpenedOrderDetails();
 
                 string actualclass = openedOrderDetails[0];
                 Assert.IsTrue(createdOrders[i - 1][3].Equals(actualclass), "incorrect class. Iter: " + i);
@@ -68,11 +69,11 @@ namespace Flights
                 string actualFlightNumber = openedOrderDetails[3];
                 Assert.IsTrue(createdOrders[i - 1][6].Equals(actualFlightNumber), "incorrect flight number. Iter: " + i);
 
-                SeachOrderTab.DeleteOrder();
+                SearchOrderTab.DeleteOrder();
 
                 Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete), "incorrect delete Error message. Iter: " + i);
 
-                string deletedOrderNumber = SeachOrderTab.DeleteOrderNumber();
+                string deletedOrderNumber = SearchOrderTab.DeleteOrderNumber();
                 Assert.IsTrue(createdOrders[i - 1][7].Equals(deletedOrderNumber), "incorrect delete order. Iter" + i);
             }
         }

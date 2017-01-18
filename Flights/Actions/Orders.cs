@@ -7,6 +7,7 @@ using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
+using Flights.Constants;
 
 namespace Flights.Actions
 {
@@ -51,46 +52,38 @@ namespace Flights.Actions
             string classRate = orderData[3];
             string numOfTickets = orderData[4];
 
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            ComboBox cmb_fromCity = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("fromCity"));
-            ComboBox cmb_toCity = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("toCity"));
-            ComboBox cmb_class = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("Class"));
-            ComboBox cmb_numOfTickets = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("numOfTickets"));
-            TextBox textBox_Date = FlightsMainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("PART_TextBox"));
-            Button btn_findFlights = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId(""));
 
-
-            cmb_fromCity.Click();
+            Element.cmb_fromCity.Click();
             Thread.Sleep(1000);  // Pause to see 
-            foreach (var city in cmb_fromCity.Items) 
+            foreach (var city in Element.cmb_fromCity.Items) 
             {
                 if (city.Name == fromCity) { city.Click(); }
             }
 
-            cmb_toCity.Click();
+            Element.cmb_toCity.Click();
             Thread.Sleep(1000);  // Pause to see 
-            foreach (var city in cmb_toCity.Items)
+            foreach (var city in Element.cmb_toCity.Items)
             {
                 if (city.Name == toCity) { city.Click(); }
             }
 
-            textBox_Date.SetValue(date);
+            Element.textBox_Date.SetValue(date);
 
-            cmb_class.Click();
+            Element.cmb_class.Click();
             Thread.Sleep(1000);  // Pause to see
-            foreach (var item in cmb_class.Items)
+            foreach (var item in Element.cmb_class.Items)
             {
                 if (item.Name == classRate) { item.Click(); }
             }
 
-            cmb_numOfTickets.Click();
+            Element.cmb_numOfTickets.Click();
             Thread.Sleep(1000);  // Pause to see
-            foreach (var item in cmb_numOfTickets.Items)
+            foreach (var item in Element.cmb_numOfTickets.Items)
             {
                 if (item.Name == numOfTickets) { item.Click(); }
             }
 
-            btn_findFlights.Click();
+            Element.btn_findFlights.Click();
         }
 
         public static List<string> SelectRandomFlight()
