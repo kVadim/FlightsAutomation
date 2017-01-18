@@ -28,13 +28,8 @@ namespace Flights.allTests
         [Test]
         public void loginCheck()
         {
-            Navigate.login();
-            
-            string expectedValuePositive = "John Smith";
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            var usernameTitle = FlightsMainWindow.Get(SearchCriteria.ByAutomationId("usernameTitle"));
-
-            Assert.IsTrue(expectedValuePositive == usernameTitle.Name, "failed to login");
+            bool loggedIN = Navigate.login();
+            Assert.IsTrue(loggedIN, "failed to login");
             
         }
 

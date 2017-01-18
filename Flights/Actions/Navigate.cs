@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using NUnit.Framework;
+using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows.Automation;
@@ -26,6 +28,7 @@ namespace Flights.Actions
                 btn_OK.Click();
                 LogedIn = true;
             }
+            Console.WriteLine("Logen in");
             return LogedIn;
         }
 
@@ -37,9 +40,34 @@ namespace Flights.Actions
                 login();
             }
             var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            var usernameTitle = FlightsMainWindow.Get(SearchCriteria.ByAutomationId("usernameTitle"));
             Tab tabs = FlightsMainWindow.Get<Tab>(SearchCriteria.ByControlType(ControlType.Tab));
-            tabs.SelectTabPage("SEARCH ORDER");
+            if (!tabs.Pages[1].IsSelected)
+            {
+                tabs.SelectTabPage("SEARCH ORDER");
+            }
+            bool isOpened = tabs.Pages[1].Enabled;
+            Assert.IsTrue(isOpened, "failed to open SEARCH ORDER tab");
+            Console.WriteLine("SEARCH ORDER tab is opened");
+            
+        }
+
+        public static void OpenBookFlightTab()
+        {
+            if (!LogedIn)
+            {
+                login();
+            }
+
+            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
+            Tab tabs = FlightsMainWindow.Get<Tab>(SearchCriteria.ByControlType(ControlType.Tab));
+            if (!tabs.Pages[0].IsSelected)
+            {
+                tabs.SelectTabPage("BOOK FLIGHT");
+            }
+            bool isOpened = tabs.Pages[0].Enabled;
+
+            Assert.IsTrue(isOpened, "failed to open BOOK FLIGHT");
+            Console.WriteLine("BOOK FLIGHT tab is opened");
         }
 
 
@@ -54,7 +82,7 @@ namespace Flights.Actions
         public static void StartApp()
         {
             Process.Start(AppParameters.PATH);
-            Thread.Sleep(2300);
+            Thread.Sleep(2500);
         }
     }
 }

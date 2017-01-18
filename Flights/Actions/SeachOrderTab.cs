@@ -5,42 +5,43 @@ using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
+using TestStack.White.UIItems.WindowItems;
 
 namespace Flights.Actions
 {
     public static class SeachOrderTab
     {
+        #region UI elements
+        static Window FlightsMainWindow { get { return Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample")); } }
+        static RadioButton radioBtn_orderNumber { get { return FlightsMainWindow.Get<RadioButton>(SearchCriteria.ByAutomationId("byNumberRadio")); } }
+        static RadioButton radioBtn_nameOrDate { get { return FlightsMainWindow.Get<RadioButton>(SearchCriteria.ByAutomationId("byNameOrDateRadio")); } }
+        static Button btn_SEARCH { get { return FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId("searchBtn")); } }
+        static Button btn_DeleteOrder { get { return FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId("")); } }
+        static Label label_OrderDeleted { get { return FlightsMainWindow.Get<Label>(SearchCriteria.ByAutomationId("orderDeleted")); } }
+        static TextBox textBox_orderNumber { get { return FlightsMainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("byNumberWatermark")); } }
+        static ComboBox flightClassCombo { get { return FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("flightClassCombo"));} }
+        static ComboBox numOfTicketsCombo { get { return  FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("numOfTicketsCombo"));} }
+        static TextBox passengerName { get { return  FlightsMainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("passengerName"));} }
+        static Label flightNumber { get { return FlightsMainWindow.Get<Label>(SearchCriteria.ByAutomationId("flightNumber")); } }
+        #endregion 
 
         public static void EnableOrderNumberSearch()
         {
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            RadioButton radioBtn_orderNumber = FlightsMainWindow.Get<RadioButton>(SearchCriteria.ByAutomationId("byNumberRadio"));
             radioBtn_orderNumber.Click();
         }
 
         public static void EnableNameOrDateSearch()
         {
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            RadioButton radioBtn_NameOrDate = FlightsMainWindow.Get<RadioButton>(SearchCriteria.ByAutomationId("byNameOrDateRadio"));
-            radioBtn_NameOrDate.Click();
+            radioBtn_nameOrDate.Click();
         }
 
-        public static void Search()
+        public static void startSearch()
         {
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            Button btn_SEARCH = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId("searchBtn"));
             btn_SEARCH.Click();
-        }
-
-        public static bool CheckOrderDetails()
-        {
-            return true;
         }
 
         public static void DeleteOrder()
         {
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            Button btn_DeleteOrder = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId(""));
             btn_DeleteOrder.Click();
             Thread.Sleep(1000);
         }
@@ -48,8 +49,6 @@ namespace Flights.Actions
         public static string DeleteOrderNumber()
         {
             Thread.Sleep(500);
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            Label label_OrderDeleted = FlightsMainWindow.Get<Label>(SearchCriteria.ByAutomationId("orderDeleted"));
             string OrderDeleted = label_OrderDeleted.Name;        
             char[] _splitchar = { ' ' };
             string[] OrderDeletedArrow = OrderDeleted.Split(_splitchar);
@@ -59,59 +58,40 @@ namespace Flights.Actions
 
         public static void EnableNameOrDate()
         {
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            RadioButton radioBtn_orderNumber = FlightsMainWindow.Get<RadioButton>(SearchCriteria.ByAutomationId("byNumberRadio"));
             radioBtn_orderNumber.Click();
         }
         
         public static void SetOrderNumber(string value)
         {
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            TextBox textBox_orderNumber = FlightsMainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("byNumberWatermark"));
             textBox_orderNumber.SetValue(value);
             Thread.Sleep(500);
         }
 
         public static bool isOrderNumberEnabled()
         {
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            TextBox textBox_orderNumber = FlightsMainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("byNumberWatermark"));
             return textBox_orderNumber.Enabled;
         }
 
         public static bool isSearchButtonEnabled()
         {
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            Button btn_SEARCH = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId("searchBtn"));
             return btn_SEARCH.Enabled;
         }
 
 
         public static List<string>  GetOpenedOrderDetails()
         {
+            
 
-            var FlightsMainWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            Label fromCityActual = FlightsMainWindow.Get<Label>(SearchCriteria.ByAutomationId("departureInitials"));
-            Label toCityActual = FlightsMainWindow.Get<Label>(SearchCriteria.ByAutomationId("arrivalInitials"));
-            Label departureDate = FlightsMainWindow.Get<Label>(SearchCriteria.ByAutomationId("departureDate"));
-            ComboBox flightClassCombo = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("flightClassCombo"));
-            ComboBox numOfTicketsCombo = FlightsMainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("numOfTicketsCombo"));
-            TextBox passengerName = FlightsMainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("passengerName"));
-
-            string fromCity = fromCityActual.Name;
-            string toCity =  toCityActual.Name;
-            string date = departureDate.Name;
             string classRate = flightClassCombo.SelectedItemText;
             string numOfTickets = numOfTicketsCombo.SelectedItemText;
-            string passenger = passengerName.Text;  
+            string passenger = passengerName.Text;
+            string number = flightNumber.Text;  
 
              List<string> actualOrderData = new List<string>();
-             actualOrderData.Add(fromCity);
-             actualOrderData.Add(toCity);
-             actualOrderData.Add(date);
              actualOrderData.Add(classRate);
              actualOrderData.Add(numOfTickets);
              actualOrderData.Add(passenger);
+             actualOrderData.Add(number);
 
              return actualOrderData;
 

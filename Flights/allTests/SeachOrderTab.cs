@@ -38,7 +38,7 @@ namespace Flights
             Navigate.OpenSearchTab();
             SeachOrderTab.EnableOrderNumberSearch();
             SeachOrderTab.SetOrderNumber(orderNumber);
-            SeachOrderTab.Search();
+            SeachOrderTab.startSearch();
 
             Assert.IsTrue(ModalWindow.checkMessageAndClose(errorMessage));
         }

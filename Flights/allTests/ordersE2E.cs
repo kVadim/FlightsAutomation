@@ -1,13 +1,9 @@
 ﻿using NUnit.Framework;
 using System.Linq;
-using System.Threading;
-using System.Windows.Automation;
-using TestStack.White;
-using TestStack.White.UIItems;
-using TestStack.White.UIItems.Finders;
 using Flights.Actions;
 using Flights.allTests;
 using System.Collections.Generic;
+using System;
 
 namespace Flights
 {
@@ -18,18 +14,34 @@ namespace Flights
         [Test]
         public void E2E([Values(2)]int iter) //number of orders to be created
         {
-            Navigate.login(); //to some tab
-
+            Navigate.OpenBookFlightTab(); 
+           
             List<List<string>> createdOrders = new List<List<string>>();
-            List<string> createdOrdersNumbers = new List<string>();
-            List<string> deletedOrdersNumbers = new List<string>();
 
             for (int i = 1; i <= iter; i++)
             {
+                string currentPassenger = "passanger" + i.ToString();
                 List<string> RandomDataForOrder = Orders.generateOrderData();
-                string currentOrderNumber = Orders.CreateOrder(RandomDataForOrder, "passanger" + i.ToString());
-                createdOrdersNumbers.Add(currentOrderNumber);
+                Orders.CreateOrder(RandomDataForOrder);
+                List<string> flightDetails = Orders.SelectRandomFlight();
+
+                string actualFromCity = flightDetails[0];
+                Assert.IsTrue(RandomDataForOrder[0].Equals(actualFromCity), "incorrect city FROM. Iter: " + i);
+
+                string actualToCity = flightDetails[1];
+                Assert.IsTrue(RandomDataForOrder[1].Equals(actualToCity), "incorrect city TO. Iter: " + i);
+
+                string actualDate = flightDetails[2];
+                Assert.IsTrue(RandomDataForOrder[2].Equals(actualDate), "incorrect date. Iter: " + i);
+
+                string currentflightNumber = flightDetails[3];
+                string currentOrderNumber = Orders.GetActualOrderNumber(currentPassenger);
+
+                RandomDataForOrder.Add(currentPassenger);
+                RandomDataForOrder.Add(currentflightNumber);
+                RandomDataForOrder.Add(currentOrderNumber);
                 createdOrders.Add(RandomDataForOrder);
+                Console.WriteLine("Created order: {0}, {1}, {2} ", RandomDataForOrder[0], RandomDataForOrder[1],RandomDataForOrder[2] );
             }
 
             Navigate.CloseApp();
@@ -40,21 +52,29 @@ namespace Flights
             {
                 Navigate.OpenSearchTab();
                 SeachOrderTab.EnableOrderNumberSearch();
-                SeachOrderTab.SetOrderNumber(createdOrdersNumbers[i-1]);
-                SeachOrderTab.Search();
-                //assert is opened
-                //Assert.IsTrue(SeachOrderTab.CheckOrderDetails()); // not implemented
-                List<string> currentlyOpenedOrderDetails =  SeachOrderTab.GetOpenedOrderDetails();
-                Assert.IsTrue( Orders.compareCreatedAndActualOrders(currentlyOpenedOrderDetails, createdOrders[i - 1], i)); 
+                SeachOrderTab.SetOrderNumber(createdOrders[i - 1][7]);
+                SeachOrderTab.startSearch();
+                List<string> openedOrderDetails = SeachOrderTab.GetOpenedOrderDetails();
+
+                string actualclass = openedOrderDetails[0];
+                Assert.IsTrue(createdOrders[i - 1][3].Equals(actualclass), "incorrect class. Iter: " + i);
+
+                string actualnumberOftickets = openedOrderDetails[1];
+                Assert.IsTrue(createdOrders[i - 1][4].Equals(actualnumberOftickets), "incorrect number of tickets. Iter: " + i);
+
+                string actualpassenger = openedOrderDetails[2];
+                Assert.IsTrue(createdOrders[i - 1][5].Equals(actualpassenger), "incorrect passenger name. Iter: " + i);
+
+                string actualFlightNumber = openedOrderDetails[3];
+                Assert.IsTrue(createdOrders[i - 1][6].Equals(actualFlightNumber), "incorrect flight number. Iter: " + i);
+
                 SeachOrderTab.DeleteOrder();
-                Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete), "incorrect Error message");
+
+                Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete), "incorrect delete Error message. Iter: " + i);
+
                 string deletedOrderNumber = SeachOrderTab.DeleteOrderNumber();
-                deletedOrdersNumbers.Add(deletedOrderNumber);
+                Assert.IsTrue(createdOrders[i - 1][7].Equals(deletedOrderNumber), "incorrect delete order. Iter" + i);
             }
-
-                Assert.IsTrue(createdOrdersNumbers.SequenceEqual(deletedOrdersNumbers), "not all orders deleted"); 
-
-
         }
     }
 }

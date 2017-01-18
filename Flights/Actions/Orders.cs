@@ -43,7 +43,7 @@ namespace Flights.Actions
             return order;
         }
 
-        public static string CreateOrder(List<string> orderData, string passenger)
+        public static void CreateOrder(List<string> orderData)
         {
             string fromCity = orderData[0]; 
             string toCity = orderData[1]; 
@@ -91,22 +91,40 @@ namespace Flights.Actions
             }
 
             btn_findFlights.Click();
+        }
 
+        public static List<string> SelectRandomFlight()
+        {
             var SelectFlightsWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
-            Button btn_selectFlight = FlightsMainWindow.Get<Button>(SearchCriteria.ByAutomationId("selectFlightBtn"));
-            ListView flights = FlightsMainWindow.Get<ListView>(SearchCriteria.ByAutomationId("flightsDataGrid"));
-            
-             Random rnd = new Random();
-             var firstFlight = flights.Rows[rnd.Next(flights.Rows.Count)];  
+            Label fromCity = SelectFlightsWindow.Get<Label>(SearchCriteria.ByAutomationId("fromCity"));
+            Label toCity = SelectFlightsWindow.Get<Label>(SearchCriteria.ByAutomationId("toCity"));
+            Button btn_selectFlight = SelectFlightsWindow.Get<Button>(SearchCriteria.ByAutomationId("selectFlightBtn"));
+            ListView flights = SelectFlightsWindow.Get<ListView>(SearchCriteria.ByAutomationId("flightsDataGrid"));
 
-            firstFlight.Click();
+            Random rnd = new Random();
+            var randomFlight = flights.Rows[rnd.Next(flights.Rows.Count)];           
+            randomFlight.Click();
+
+            string from = fromCity.Name.Substring(6, fromCity.Name.Length-6);
+            string to = toCity.Name.Substring(4, toCity.Name.Length-4);
+            string date = Convert.ToDateTime(randomFlight.Cells[6].Name).ToString("dd.MM.yyyy");
+            string fligthNumber = randomFlight.Cells[7].Name;
+
+            List<string> flightData = new List<string>();
+            flightData.Add(from);
+            flightData.Add(to);
+            flightData.Add(date);
+            flightData.Add(fligthNumber);
+
             btn_selectFlight.Click();
+            return flightData;
+        }
 
+            public static string GetActualOrderNumber(string passenger)
+        {
             var FlightsDetailsWindow = Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample"));
             TextBox textBox_PassengerName = FlightsDetailsWindow.Get<TextBox>(SearchCriteria.ByAutomationId("passengerName"));
             Button btn_Order = FlightsDetailsWindow.Get<Button>(SearchCriteria.ByAutomationId("orderBtn"));
-
-
 
             textBox_PassengerName.SetValue(passenger);  
             btn_Order.Click();
@@ -122,24 +140,6 @@ namespace Flights.Actions
             btn_NewSearch.Click();
 
             return orderNumber;
-        }
-
-        public static bool compareCreatedAndActualOrders(List<string> currentlyOpened, List<string> created ,int iter)
-        {
-            string f1 = currentlyOpened[0].ToLower();
-            string f2 = currentlyOpened[1].ToLower();
-            string f3 = currentlyOpened[2];
-            string f4 = created[0].Substring(0, 3).ToLower();
-            string f = created[1].Substring(0, 3).ToLower();
-            string ff = String.Format("{0:dd MMM}", created[2]);
-
-            Assert.AreEqual(currentlyOpened[0].ToLower(), created[0].Substring(0, 3).ToLower());
-            Assert.AreEqual(currentlyOpened[1].ToLower(), created[1].Substring(0, 3).ToLower());
-         //   Assert.AreEqual(currentlyOpened[2], String.Format("{0:dd MMM}", created[2]));
-            Assert.AreEqual(currentlyOpened[3], created[3]); 
-            Assert.AreEqual(currentlyOpened[4], created[4]);
-            Assert.AreEqual(currentlyOpened[5], "passenger"+iter.ToString());
-            return true;
         }
     }
 
