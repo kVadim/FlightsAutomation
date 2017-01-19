@@ -18,7 +18,8 @@ namespace Flights.Actions
                 Element.btn_OK.Click();
                 LogedIn = true;
             }
-            Console.WriteLine("Logen in");
+
+            Logger.Log.Info("Logen in");
             return LogedIn;
         }
 
@@ -36,7 +37,7 @@ namespace Flights.Actions
             }
             bool isOpened = Element.tabs.Pages[1].Enabled;
             Assert.IsTrue(isOpened, "failed to open SEARCH ORDER tab");
-            Console.WriteLine("SEARCH ORDER tab is opened");
+            Logger.Log.Info("SEARCH ORDER tab is opened");
             
         }
 
@@ -54,7 +55,7 @@ namespace Flights.Actions
             bool isOpened = Element.tabs.Pages[0].Enabled;
 
             Assert.IsTrue(isOpened, "failed to open BOOK FLIGHT");
-            Console.WriteLine("BOOK FLIGHT tab is opened");
+            Logger.Log.Info("BOOK FLIGHT tab is opened");
         }
 
 
@@ -62,6 +63,7 @@ namespace Flights.Actions
         {
             Element.FlightsMainWindow.Close();
             LogedIn = false;
+            Logger.Log.Info("Application is closed");
         }
 
 
@@ -69,6 +71,7 @@ namespace Flights.Actions
         {
             Process.Start(AppParameters.PATH);
             Thread.Sleep(2500);
+            Logger.Log.Info("Login Page Opened");
         }
     }
 }

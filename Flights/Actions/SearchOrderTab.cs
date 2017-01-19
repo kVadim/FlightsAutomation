@@ -20,6 +20,7 @@ namespace Flights.Actions
         public static void startSearch()
         {
             Element.btn_SEARCH.Click();
+            Logger.Log.Info("Seach");
         }
 
         public static void DeleteOrder()
@@ -47,6 +48,7 @@ namespace Flights.Actions
         {
             Element.textBox_OrderNumber.SetValue(value);
             Thread.Sleep(500);
+            Logger.Log.Info("Try search: Order Number " + value);
         }
 
         public static bool isOrderNumberEnabled()

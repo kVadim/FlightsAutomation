@@ -10,7 +10,7 @@ namespace Flights.Actions
 {
     public static class Orders
     {
-        public static List<string> generateOrderData()
+        public static List<string> generateOrderData(int i)
         {
             List<string> classRates = new List<string> { "Economy", "Business", "First" };
             List<string> cities = new List<string> { "Denver", "Frankfurt", "London", "Los Angeles", "Paris", "Portland", "San Francisco", "Seattle", "Zurich", "Sydney" };
@@ -36,6 +36,13 @@ namespace Flights.Actions
             order.Add(date);
             order.Add(classRate);
             order.Add(numOfTickets);
+
+            Logger.Log.Info("ITTERATION: "+ i);
+            Logger.Log.Info("Generated Order City From: " + fromCity);
+            Logger.Log.Info("Generated Order City To  : " + toCity);
+            Logger.Log.Info("Generated Order Date     : " + date);
+            Logger.Log.Info("Generated Order Class    : " + classRate);
+            Logger.Log.Info("Generated Order №Tickets : " + numOfTickets);
 
             return order;
         }
@@ -80,9 +87,10 @@ namespace Flights.Actions
             }
 
             Element.btn_findFlights.Click();
+            Logger.Log.Info("Order created");
         }
 
-        public static List<string> SelectRandomFlight()
+        public static List<string> SelectRandomFlight(int i)
         {
             ListView flights = Element.FlightsMainWindow.Get<ListView>(SearchCriteria.ByAutomationId("flightsDataGrid"));
             Random rnd = new Random();
@@ -101,6 +109,13 @@ namespace Flights.Actions
             flightData.Add(fligthNumber);
 
             Element.btn_selectFlight.Click();
+
+            Logger.Log.Info("Random Flight for is selected");
+            Logger.Log.Info("Selected Flight number   : " + fligthNumber);
+            Logger.Log.Info("Selected Flight city From: " + from);
+            Logger.Log.Info("Selected Flight city To  : " + to);
+            Logger.Log.Info("Selected Flight city date: " + date);
+
             return flightData;
         }
 
@@ -116,6 +131,9 @@ namespace Flights.Actions
             string orderNumber = OrderCompletedArrow[1];
 
             Element.btn_NewSearch.Click();
+            Logger.Log.Info("Created Order Passenger : " + passenger);
+            Logger.Log.Info("Created Order Number    : " + orderNumber);
+
             return orderNumber;
         }
     }

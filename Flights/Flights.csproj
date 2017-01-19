@@ -63,9 +63,11 @@
     <Compile Include="allTests\SeachOrderTab.cs" />
     <Compile Include="Constants\Const.cs" />
     <Compile Include="Constants\Element Locators.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

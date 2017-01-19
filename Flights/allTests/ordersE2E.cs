@@ -10,9 +10,9 @@ namespace Flights
     [TestFixture]
     public class End2End: BaseTest
     {       
-        // validation + log + sessions
+        //  log + sessions + logic
         [Test]
-        public void E2E([Values(4)]int iter) //number of orders to be created
+        public void E2E([Values(2)]int iter) //number of orders to be created
         {
             Navigate.OpenBookFlightTab(); 
            
@@ -21,9 +21,10 @@ namespace Flights
             for (int i = 1; i <= iter; i++)
             {
                 string currentPassenger = "passanger" + i.ToString();
-                List<string> RandomDataForOrder = Orders.generateOrderData();
+                List<string> RandomDataForOrder = Orders.generateOrderData(i);
+                
                 Orders.CreateOrder(RandomDataForOrder);
-                List<string> flightDetails = Orders.SelectRandomFlight();
+                List<string> flightDetails = Orders.SelectRandomFlight(i);
 
                 string actualFromCity = flightDetails[0];
                 Assert.IsTrue(RandomDataForOrder[0].Equals(actualFromCity), "incorrect city FROM. Iter: " +
@@ -42,7 +43,6 @@ namespace Flights
                 RandomDataForOrder.Add(currentflightNumber);
                 RandomDataForOrder.Add(currentOrderNumber);
                 createdOrders.Add(RandomDataForOrder);
-                Console.WriteLine("Created order: {0}, {1}, {2} ", RandomDataForOrder[0], RandomDataForOrder[1],RandomDataForOrder[2] );
             }
 
             Navigate.CloseApp();

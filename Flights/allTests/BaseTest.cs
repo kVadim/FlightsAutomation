@@ -7,9 +7,13 @@ namespace Flights.allTests
 {
     public class BaseTest
     {
+        
         [SetUp]
         public void RunApplication()
         {
+            Logger.InitLogger();
+            Logger.Log.Info("New Test Started !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
             Navigate.StartApp();
         }
 
@@ -27,6 +31,7 @@ namespace Flights.allTests
                     p.Kill();
                 }
             }
+            Logger.Log.Info("Stopped");
         }
     }
 }
