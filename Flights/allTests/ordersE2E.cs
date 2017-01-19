@@ -12,7 +12,7 @@ namespace Flights
     {       
         // validation + log + sessions
         [Test]
-        public void E2E([Values(2)]int iter) //number of orders to be created
+        public void E2E([Values(4)]int iter) //number of orders to be created
         {
             Navigate.OpenBookFlightTab(); 
            

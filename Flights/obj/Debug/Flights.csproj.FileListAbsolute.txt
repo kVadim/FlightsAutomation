@@ -33,3 +33,5 @@ D:\Homework\FlightsAutomation\Flights\bin\Debug\Castle.Core.xml
 D:\Homework\FlightsAutomation\Flights\bin\Debug\nunit.framework.xml
 D:\Homework\FlightsAutomation\Flights\bin\Debug\TestStack.White.pdb
 D:\Homework\FlightsAutomation\Flights\bin\Debug\TestStack.White.xml
+D:\FlightsAutomation\Flights\bin\Debug\log4net.dll
+D:\FlightsAutomation\Flights\bin\Debug\log4net.xml
