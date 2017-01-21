@@ -63,6 +63,7 @@
     <Compile Include="allTests\SeachOrderTab.cs" />
     <Compile Include="Constants\Const.cs" />
     <Compile Include="Constants\Element Locators.cs" />
+    <Compile Include="Helpers\wait.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
