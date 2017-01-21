@@ -1,14 +1,9 @@
 ﻿using Flights.Actions;
 using NUnit.Framework;
-using System.Linq;
-using System.Threading;
-using System.Windows.Automation;
-using TestStack.White;
-using TestStack.White.UIItems;
-using TestStack.White.UIItems.Finders;
 
 namespace Flights.allTests
 {
+    [TestFixture]
     public class LoginTests: BaseTest
     {
         [Test, Sequential]
@@ -20,28 +15,30 @@ namespace Flights.allTests
                                         ExpectedMsg.wrongCredentials    )]string errorMessage
                                 )
         {
-            Navigate.login(name, password);
-            Assert.IsTrue(ModalWindow.checkMessageAndClose(errorMessage), "incorrect Error message");
+            bool isNegativeCheck = true;
+            Navigate.login(name, password, isNegativeCheck);
+            Assert.IsTrue(ModalWindow.checkMessageAndClose(errorMessage));
         }
 
 
         [Test]
         public void loginCheck()
         {
-            bool loggedIN = Navigate.login();
-            Assert.IsTrue(loggedIN, "failed to login");
-            
+            Assert.IsTrue(Navigate.login());
         }
 
 
         [Test, Sequential]
-        public void login_OKbtnCheck(
+        public void CheckOKbtnAvailability(
                                     [Values("john", ""  )]string name,
                                     [Values("",     "hp")]string password
                                     )
         {
-            Assert.IsTrue(!Navigate.login(name, password), "button OK isn't disbled");
-
+            Assert.IsTrue(!Navigate.isOKEnabled(name, password));
         }
     }
 }
+
+
+
+//public static readonly ILog log = LogManager.GetLogger();

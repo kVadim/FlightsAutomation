@@ -6,33 +6,35 @@ namespace Flights
 {
     [TestFixture]
     public class OrderNumberCheck: BaseTest
-    {       
+    {
         [Test]
-        public void searchButtonAvailability()
+        public void searchButton_Availability()
          {
             Navigate.OpenSearchTab();
             SearchOrderTab.EnableOrderNumberSearch();
             SearchOrderTab.SetOrderNumber("123");
-            Assert.IsTrue(SearchOrderTab.isSearchButtonEnabled());
+            Assert.IsTrue(SearchOrderTab.isSearchButtonEnabled(true));
             SearchOrderTab.SetOrderNumber("");
-            Assert.IsTrue(!SearchOrderTab.isSearchButtonEnabled());
+            Assert.IsTrue(!SearchOrderTab.isSearchButtonEnabled(false));
         }
 
         [Test]
-        public void orderNumberAvailability()
+        public void orderNumber_Availability()
         {
             Navigate.OpenSearchTab();
             SearchOrderTab.EnableOrderNumberSearch();
-            Assert.IsTrue(SearchOrderTab.isOrderNumberEnabled());
+            Assert.IsTrue(SearchOrderTab.isOrderNumberEnabled(true));
             SearchOrderTab.EnableNameOrDateSearch();
-            Assert.IsTrue(!SearchOrderTab.isOrderNumberEnabled());
+            Assert.IsTrue(!SearchOrderTab.isOrderNumberEnabled(false));
         }
 
 
         [Test, Sequential]
-        public void incorrectOrderNumber(
-                                        [Values("Some text",           "3333333",        "-5555"               )]string orderNumber,
-                                        [Values(ExpectedMsg.onlyNubmers, ExpectedMsg.notExist, ExpectedMsg.lessThanZero )]string errorMessage
+        public void incorrect_OrderNumber(
+                                        [Values("TextVaule", "3333333","-5555")]string orderNumber,
+                                        [Values(ExpectedMsg.onlyNubmers, 
+                                                ExpectedMsg.notExist, 
+                                                ExpectedMsg.lessThanZero )]string errorMessage
                                         )
         {
             Navigate.OpenSearchTab();

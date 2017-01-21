@@ -13,6 +13,7 @@ namespace Flights.Constants
     {
         static public Window FlightsMainWindow { get { return Desktop.Instance.Windows().First(w => w.Name.Contains("HPE MyFlight Sample")); } }
         static public Tab tabs { get { return FlightsMainWindow.Get<Tab>(SearchCriteria.ByControlType(ControlType.Tab)); } }
+        static public Label usernameTitle { get { return FlightsMainWindow.Get<Label>(SearchCriteria.ByAutomationId("usernameTitle")); } }
 
         #region Login page
         static public TextBox textBox_Name { get { return FlightsMainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("agentName")); } }

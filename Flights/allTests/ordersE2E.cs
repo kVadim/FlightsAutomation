@@ -80,32 +80,3 @@ namespace Flights
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-
-
-
-//  Keyboard.Instance.Enter("text to check");

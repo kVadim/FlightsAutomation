@@ -10,17 +10,19 @@ namespace Flights.Actions
         public static void EnableOrderNumberSearch()
         {
             Element.radioBtn_OrderNumber.Click();
+            Logger.Log.Debug("Click radiobutton Order_Number");
         }
 
         public static void EnableNameOrDateSearch()
         {
             Element.radioBtn_NameOrDate.Click();
+            Logger.Log.Debug("Click radiobutton Name_Or_Date");
         }
 
         public static void startSearch()
         {
             Element.btn_SEARCH.Click();
-            Logger.Log.Info("Seach");
+            Logger.Log.Debug("Start search");
         }
 
         public static void DeleteOrder()
@@ -48,17 +50,58 @@ namespace Flights.Actions
         {
             Element.textBox_OrderNumber.SetValue(value);
             Thread.Sleep(500);
-            Logger.Log.Info("Try search: Order Number " + value);
+            Logger.Log.Debug("Try search: Order Number - " + value);
         }
 
-        public static bool isOrderNumberEnabled()
+        public static bool isOrderNumberEnabled(bool expectedState)
         {
+            bool actuaState = Element.textBox_OrderNumber.Enabled;
+            if (actuaState && expectedState)
+            {
+                Logger.Log.Info("TextBox OrderNumber is Enabled WHEN radionbutton is checked");
+            }
+            else if (actuaState && !expectedState)
+            {
+                Logger.Log.Error("TextBox OrderNumber is not Disabled");
+            }
+
+            else if (!actuaState && !expectedState)
+            {
+                Logger.Log.Info("TextBox OrderNumber is Disabled WHEN radionbutton is unchecked");
+            }
+
+            else if (!actuaState && expectedState)
+            {
+                Logger.Log.Error("TextBox OrderNumber is  not Enabled");
+
+            }
             return Element.textBox_OrderNumber.Enabled;
         }
 
-        public static bool isSearchButtonEnabled()
+        public static bool isSearchButtonEnabled(bool expectedState)
         {
-            return Element.btn_SEARCH.Enabled;
+            bool actuaState = Element.btn_SEARCH.Enabled;
+            if (actuaState && expectedState)
+            {
+                 Logger.Log.Info("SearchButton is Enabled WHEN OrderNumber is not empty");           
+            }
+            else if (actuaState && !expectedState)
+            {
+                Logger.Log.Error("SearchButton is not Disabled");
+            }
+
+            else if (!actuaState && !expectedState)
+            {
+                Logger.Log.Info("SearchButton is Disabled WHEN OrderNumber is empty");
+            }
+
+            else if (!actuaState && expectedState)
+            {
+                Logger.Log.Error("SearchButton is  not Enabled");
+
+            }
+
+            return actuaState;
         }
 
 
