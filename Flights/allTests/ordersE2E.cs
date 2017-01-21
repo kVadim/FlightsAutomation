@@ -15,31 +15,36 @@ namespace Flights
         public void E2E([Values(2)]int iter) //number of orders to be created
         {
             Navigate.OpenBookFlightTab(); 
-           
             List<List<string>> createdOrders = new List<List<string>>();
+            string expected;
+            string actual;
 
             for (int i = 1; i <= iter; i++)
             {
-                string currentPassenger = "passanger" + i.ToString();
                 List<string> RandomDataForOrder = Orders.generateOrderData(i);
                 
                 Orders.CreateOrder(RandomDataForOrder);
                 List<string> flightDetails = Orders.SelectRandomFlight(i);
 
-                string actualFromCity = flightDetails[0];
-                Assert.IsTrue(RandomDataForOrder[0].Equals(actualFromCity), "incorrect city FROM. Iter: " +
-                    i + ", expected: " + RandomDataForOrder[0] + " actual: " + actualFromCity);
+                expected = RandomDataForOrder[1];
+                actual = flightDetails[1];
+                bool FromCity = Orders.isEqual(expected, actual, "Genetated CityFROM", "Flight CityFROM");
+                Assert.IsTrue(FromCity);
 
-                string actualToCity = flightDetails[1];
-                Assert.IsTrue(RandomDataForOrder[1].Equals(actualToCity), "incorrect city TO. Iter: " + i);
+                expected = RandomDataForOrder[2];
+                actual = flightDetails[2];
+                bool ToCity = Orders.isEqual(expected, actual, "Genetated  City TO", "Flight  City TO");
+                Assert.IsTrue(ToCity);
 
-                string actualDate = flightDetails[2];
-                Assert.IsTrue(RandomDataForOrder[2].Equals(actualDate), "incorrect date. Iter: " + i);
+                expected = RandomDataForOrder[3];
+                actual = flightDetails[3];
+                bool Date = Orders.isEqual(expected, actual, "Genetated Date", "Flight Date");
+                Assert.IsTrue(Date);
 
-                string currentflightNumber = flightDetails[3];
-                string currentOrderNumber = Orders.GetActualOrderNumber(currentPassenger);
 
-                RandomDataForOrder.Add(currentPassenger);
+                string currentflightNumber = flightDetails[0];
+                string currentOrderNumber = Orders.GetActualOrderNumber(RandomDataForOrder[0]);
+
                 RandomDataForOrder.Add(currentflightNumber);
                 RandomDataForOrder.Add(currentOrderNumber);
                 createdOrders.Add(RandomDataForOrder);
@@ -55,26 +60,40 @@ namespace Flights
                 SearchOrderTab.EnableOrderNumberSearch();
                 SearchOrderTab.SetOrderNumber(createdOrders[i - 1][7]);
                 SearchOrderTab.startSearch();
-                List<string> openedOrderDetails = SearchOrderTab.GetOpenedOrderDetails();
+                List<string> openedOrderDetails = SearchOrderTab.GetOpenedOrderDetails(i);
 
-                string actualclass = openedOrderDetails[0];
-                Assert.IsTrue(createdOrders[i - 1][3].Equals(actualclass), "incorrect class. Iter: " + i);
+                expected = createdOrders[i - 1][0];
+                actual = openedOrderDetails[0];
+                bool Passenger = Orders.isEqual(expected, actual,"Genetated Passenger", "Current Order Passenger");
+                Assert.IsTrue(Passenger);
 
-                string actualnumberOftickets = openedOrderDetails[1];
-                Assert.IsTrue(createdOrders[i - 1][4].Equals(actualnumberOftickets), "incorrect number of tickets. Iter: " + i);
+                expected = createdOrders[i - 1][6];
+                actual = openedOrderDetails[1];
+                bool FlightNumber = Orders.isEqual(expected, actual, "Genetated FlightNumber", "Current Order FlightNumber");
+                Assert.IsTrue(FlightNumber);
 
-                string actualpassenger = openedOrderDetails[2];
-                Assert.IsTrue(createdOrders[i - 1][5].Equals(actualpassenger), "incorrect passenger name. Iter: " + i);
+                expected = createdOrders[i - 1][4];
+                actual = openedOrderDetails[2];
+                bool Class = Orders.isEqual(expected, actual, "Genetated Class", "Current Order Class" );
+                Assert.IsTrue(Class);
 
-                string actualFlightNumber = openedOrderDetails[3];
-                Assert.IsTrue(createdOrders[i - 1][6].Equals(actualFlightNumber), "incorrect flight number. Iter: " + i);
+                expected = createdOrders[i - 1][5];
+                actual = openedOrderDetails[3];
+                bool Tickets = Orders.isEqual(expected, actual, "Genetated Number of Tickets", "Current Order Number of Tickets");
+                Assert.IsTrue(Tickets);
+
 
                 SearchOrderTab.DeleteOrder();
 
-                Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete), "incorrect delete Error message. Iter: " + i);
+                Assert.IsTrue(ModalWindow.checkMessageAndClose(ExpectedMsg.confirmToDelete));
 
                 string deletedOrderNumber = SearchOrderTab.DeleteOrderNumber();
-                Assert.IsTrue(createdOrders[i - 1][7].Equals(deletedOrderNumber), "incorrect delete order. Iter" + i);
+
+                expected = createdOrders[i - 1][7];
+                actual = deletedOrderNumber;
+                bool OrderNumber = Orders.isEqual(expected, actual, "Curent OrderNumber", "Deleted OrderNumber");
+                Assert.IsTrue(OrderNumber);
+             
             }
         }
     }

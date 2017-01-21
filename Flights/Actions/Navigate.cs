@@ -81,7 +81,7 @@ namespace Flights.Actions
             bool isOpened = Element.tabs.Pages[0].Enabled;
 
             Assert.IsTrue(isOpened, "failed to open BOOK FLIGHT");
-            Logger.Log.Info("BOOK FLIGHT tab is opened");
+            Logger.Log.Debug("BOOK FLIGHT tab is opened");
         }
 
 

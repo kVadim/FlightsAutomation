@@ -21,13 +21,13 @@ namespace Flights.allTests
         [TearDown]
         public void RunAfterAnyTests()
         {
-            if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure)
+            if (TestContext.CurrentContext.Result.Outcome == ResultState.Success)
             {
-                Logger.Log.Info("Test Failed");
+                Logger.Log.Info("Test PASSED");
             }
             else
             {
-                Logger.Log.Info("Test PASSED");
+                Logger.Log.Info("Test Failed");
             }
             Navigate.CloseApp();
             Thread.Sleep(1000);

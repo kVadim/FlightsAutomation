@@ -15,6 +15,7 @@ namespace Flights.Actions
             List<string> classRates = new List<string> { "Economy", "Business", "First" };
             List<string> cities = new List<string> { "Denver", "Frankfurt", "London", "Los Angeles", "Paris", "Portland", "San Francisco", "Seattle", "Zurich", "Sydney" };
 
+            string currentPassenger = "passanger" + i.ToString();
             Random rnd = new Random();
             string fromCity, toCity;
             while (true)
@@ -31,6 +32,7 @@ namespace Flights.Actions
             string numOfTickets = rnd.Next(1, 99).ToString();
 
             List<string> order = new List<string>();
+            order.Add(currentPassenger);
             order.Add(fromCity);
             order.Add(toCity);
             order.Add(date);
@@ -38,36 +40,37 @@ namespace Flights.Actions
             order.Add(numOfTickets);
 
             Logger.Log.Info("ITTERATION: "+ i);
-            Logger.Log.Info("Generated Order City From: " + fromCity);
-            Logger.Log.Info("Generated Order City To  : " + toCity);
-            Logger.Log.Info("Generated Order Date     : " + date);
-            Logger.Log.Info("Generated Order Class    : " + classRate);
-            Logger.Log.Info("Generated Order №Tickets : " + numOfTickets);
+            Logger.Log.Debug("Generated Passenger      : " + order[0]);
+            Logger.Log.Debug("Generated Order City From: " + order[1]);
+            Logger.Log.Debug("Generated Order City To  : " + order[2]);
+            Logger.Log.Debug("Generated Order Date     : " + order[3]);
+            Logger.Log.Debug("Generated Order Class    : " + order[4]);
+            Logger.Log.Debug("Generated Order №Tickets : " + order[5]);
 
             return order;
         }
 
         public static void CreateOrder(List<string> orderData)
         {
-            string fromCity = orderData[0]; 
-            string toCity = orderData[1]; 
-            string date = orderData[2]; 
-            string classRate = orderData[3];
-            string numOfTickets = orderData[4];
+            string fromCity = orderData[1]; 
+            string toCity = orderData[2]; 
+            string date = orderData[3]; 
+            string classRate = orderData[4];
+            string numOfTickets = orderData[5];
 
 
             Element.cmb_fromCity.Click();
             Thread.Sleep(1200);  // Pause to see 
             foreach (var city in Element.cmb_fromCity.Items) 
             {
-                if (city.Name == fromCity) { city.Click(); }
+                if (city.Name == fromCity) { city.Select(); }
             }
 
             Element.cmb_toCity.Click();
             Thread.Sleep(1200);  // Pause to see 
             foreach (var city in Element.cmb_toCity.Items)
             {
-                if (city.Name == toCity) { city.Click(); }
+                if (city.Name == toCity) { city.Select(); }
             }
 
             Element.textBox_Date.SetValue(date);
@@ -76,14 +79,14 @@ namespace Flights.Actions
             Thread.Sleep(1000);  // Pause to see
             foreach (var item in Element.cmb_class.Items)
             {
-                if (item.Name == classRate) { item.Click(); }
+                if (item.Name == classRate) { item.Select();}
             }
 
             Element.cmb_numOfTickets.Click();
             Thread.Sleep(1000);  // Pause to see
             foreach (var item in Element.cmb_numOfTickets.Items)
             {
-                if (item.Name == numOfTickets) { item.Click(); }
+                if (item.Name == numOfTickets) { item.Select();}
             }
 
             Element.btn_findFlights.Click();
@@ -103,18 +106,19 @@ namespace Flights.Actions
             string fligthNumber = randomFlight.Cells[7].Name;
 
             List<string> flightData = new List<string>();
+            flightData.Add(fligthNumber);
             flightData.Add(from);
             flightData.Add(to);
             flightData.Add(date);
-            flightData.Add(fligthNumber);
+            
 
             Element.btn_selectFlight.Click();
 
-            Logger.Log.Info("Random Flight for is selected");
-            Logger.Log.Info("Selected Flight number   : " + fligthNumber);
-            Logger.Log.Info("Selected Flight city From: " + from);
-            Logger.Log.Info("Selected Flight city To  : " + to);
-            Logger.Log.Info("Selected Flight city date: " + date);
+            Logger.Log.Info("Random Flight is selected");
+            Logger.Log.Debug("Selected Random Flight number   : " + fligthNumber);
+            Logger.Log.Debug("Selected Random Flight city From: " + from);
+            Logger.Log.Debug("Selected Random Flight city To  : " + to);
+            Logger.Log.Debug("Selected Random Flight city date: " + date);
 
             return flightData;
         }
@@ -131,10 +135,24 @@ namespace Flights.Actions
             string orderNumber = OrderCompletedArrow[1];
 
             Element.btn_NewSearch.Click();
-            Logger.Log.Info("Created Order Passenger : " + passenger);
             Logger.Log.Info("Created Order Number    : " + orderNumber);
 
             return orderNumber;
+        }
+
+        public static bool isEqual(string expected, string actual, string nameExpected, string nameActual)
+        {
+            bool currentCheck = expected.Equals(actual);
+            if (currentCheck)
+            {
+                Logger.Log.Info(nameExpected + " = " + nameActual + ": " + expected + "/" + actual);
+            }
+            else
+            {
+                Logger.Log.Error(nameExpected + " != " + nameActual + ": " + expected + "/" + actual);
+            }
+
+            return currentCheck;
         }
     }
 

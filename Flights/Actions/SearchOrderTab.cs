@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using Flights.Constants;
+using System;
 
 namespace Flights.Actions
 {
@@ -27,7 +28,15 @@ namespace Flights.Actions
 
         public static void DeleteOrder()
         {
-            Element.btn_DeleteOrder.Click();
+            try 
+            {
+                Element.btn_DeleteOrder.Click();
+                Logger.Log.Info("Oreder is deteted");
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error("Failed to delete", ex);
+            }
             Thread.Sleep(1000);
         }
 
@@ -105,7 +114,7 @@ namespace Flights.Actions
         }
 
 
-        public static List<string>  GetOpenedOrderDetails()
+        public static List<string>  GetOpenedOrderDetails(int i)
         {
             string classRate = Element.flightClassCombo.SelectedItemText;
             string numOfTickets = Element.numOfTicketsCombo.SelectedItemText;
@@ -113,12 +122,18 @@ namespace Flights.Actions
             string number = Element.flightNumber.Text;  
 
             List<string> actualOrderData = new List<string>();
-            actualOrderData.Add(classRate);
-            actualOrderData.Add(numOfTickets);
             actualOrderData.Add(passenger);
             actualOrderData.Add(number);
+            actualOrderData.Add(classRate);
+            actualOrderData.Add(numOfTickets);
 
-             return actualOrderData;
+            Logger.Log.Info("ITTERATION: " + i);
+            Logger.Log.Info("Opened Order Passenger    : " + actualOrderData[0]);
+            Logger.Log.Info("Opened Order Flight Number: " + actualOrderData[1]);
+            Logger.Log.Info("Opened Order Order Class  : " + actualOrderData[2]);
+            Logger.Log.Info("Opened Order № of Tickets : " + actualOrderData[3]);
+
+            return actualOrderData;
         }
     }
 }
