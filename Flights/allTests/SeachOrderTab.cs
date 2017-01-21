@@ -8,7 +8,7 @@ namespace Flights
     public class OrderNumberCheck: BaseTest
     {
         [Test]
-        public void searchButton_Availability()
+        public void searchButton_AvailabilityCheck()
          {
             Navigate.OpenSearchTab();
             SearchOrderTab.EnableOrderNumberSearch();
@@ -19,7 +19,7 @@ namespace Flights
         }
 
         [Test]
-        public void orderNumber_Availability()
+        public void orderNumber_AvailabilityCheck()
         {
             Navigate.OpenSearchTab();
             SearchOrderTab.EnableOrderNumberSearch();

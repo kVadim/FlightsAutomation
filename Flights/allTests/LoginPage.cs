@@ -29,7 +29,7 @@ namespace Flights.allTests
 
 
         [Test, Sequential]
-        public void CheckOKbtnAvailability(
+        public void OK_btn_AvailabilityCheck(
                                     [Values(AppParam.DefaulName, "")]string name,
                                     [Values("", AppParam.DefaulPass)]string password
                                     )
