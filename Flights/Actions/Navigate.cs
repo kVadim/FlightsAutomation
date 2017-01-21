@@ -10,7 +10,7 @@ namespace Flights.Actions
     {
         public static bool LogedIn = false;
 
-        public static bool login(string name = "john", string password="hp", bool isNegativeCheck=false)
+        public static bool login(string name = AppParam.DefaulName, string password = AppParam.DefaulPass, bool isNegativeCheck = false)
         {
             Logger.Log.Debug("Login Page Opened");
             Element.textBox_Name.SetValue(name);
@@ -95,7 +95,7 @@ namespace Flights.Actions
 
         public static void StartApp()
         {
-            Process.Start(AppParameters.PATH);
+            Process.Start(AppParam.PATH);
             Thread.Sleep(2500);
             Logger.Log.Debug("Flight Application is opened");
         }

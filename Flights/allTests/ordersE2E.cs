@@ -10,9 +10,8 @@ namespace Flights
     [TestFixture]
     public class End2End: BaseTest
     {       
-        //  log + sessions + logic
         [Test]
-        public void E2E([Values(2)]int iter) //number of orders to be created
+        public void E2E([Values(20)]int iter) //number of orders to be created
         {
             Navigate.OpenBookFlightTab(); 
             List<List<string>> createdOrders = new List<List<string>>();
@@ -53,7 +52,6 @@ namespace Flights
             Navigate.CloseApp();
             Navigate.StartApp();
            
-
             for (int i = 1; i <= iter; i++)
             {
                 Navigate.OpenSearchTab();

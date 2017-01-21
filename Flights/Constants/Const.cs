@@ -18,11 +18,13 @@ using TestStack.White.UIItems.ListBoxItems;
 namespace Flights
 {
     
-    public static class AppParameters
+    public static class AppParam
     {
         public const string PATH = "D:\\ADM Automation\\ADM exam task\\ADM exam task GUI\\Flights Application\\FlightsGUI.exe";
         //public const string PATH = "D:\\Flights Application\\FlightsGUI.exe"; 
         public const string ProcessName = "FlightsGUI";
+        public const string DefaulName = "john";
+        public const string DefaulPass = "hp";
     }
 
     public static class ExpectedMsg

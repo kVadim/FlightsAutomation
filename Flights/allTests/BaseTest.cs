@@ -31,7 +31,7 @@ namespace Flights.allTests
             }
             Navigate.CloseApp();
             Thread.Sleep(1000);
-            var processesToKIll = Process.GetProcessesByName(AppParameters.ProcessName);
+            var processesToKIll = Process.GetProcessesByName(AppParam.ProcessName);
             if (processesToKIll.Length > 0)
             {
                 foreach (var p in processesToKIll)

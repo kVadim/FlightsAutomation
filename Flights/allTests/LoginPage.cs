@@ -30,8 +30,8 @@ namespace Flights.allTests
 
         [Test, Sequential]
         public void CheckOKbtnAvailability(
-                                    [Values("john", ""  )]string name,
-                                    [Values("",     "hp")]string password
+                                    [Values(AppParam.DefaulName, "")]string name,
+                                    [Values("", AppParam.DefaulPass)]string password
                                     )
         {
             Assert.IsTrue(!Navigate.isOKEnabled(name, password));
