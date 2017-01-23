@@ -5,6 +5,7 @@ using System.Threading;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using Flights.Constants;
+using Flights.Helpers;
 
 namespace Flights.Actions
 {
@@ -128,7 +129,7 @@ namespace Flights.Actions
             Element.textBox_PassengerName.SetValue(passenger);
             Element.btn_Order.Click();
             Thread.Sleep(1500);
-
+           // wait.waitForObject(() => Element.label_OrderCompleted);
             string OrderCompleted = Element.label_OrderCompleted.Name;
             char[] _splitchar = { ' ' };
             string[] OrderCompletedArrow = OrderCompleted.Split(_splitchar);

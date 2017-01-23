@@ -30,7 +30,7 @@ namespace Flights.allTests
                 Logger.Log.Info("Test Failed");
             }
             Navigate.CloseApp();
-            Thread.Sleep(1000);
+            Thread.Sleep(1200);
             var processesToKIll = Process.GetProcessesByName(AppParam.ProcessName);
             if (processesToKIll.Length > 0)
             {

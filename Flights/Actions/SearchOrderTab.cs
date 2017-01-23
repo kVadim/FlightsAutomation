@@ -42,6 +42,7 @@ namespace Flights.Actions
 
         public static string DeleteOrderNumber()
         {
+            // wait.waitForObject(() => Element.label_OrderDeleted);
             Thread.Sleep(500);
             string OrderDeleted = Element.label_OrderDeleted.Name;        
             char[] _splitchar = { ' ' };
