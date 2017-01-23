@@ -1,20 +1,4 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Automation;
-using TestStack.White;
-using TestStack.White.UIItems;
-using TestStack.White.UIItems.Finders;
-using TestStack.White.UIItems.TabItems;
-using TestStack.White.UIItems.WindowItems;
-using Flights.Actions;
-using TestStack.White.UIItems.ListBoxItems;
-
+﻿
 namespace Flights
 {
     
