@@ -38,13 +38,13 @@ namespace Flights.Actions
             {
                 Logger.Log.Error("Failed to delete", ex);
             }
-            //Thread.Sleep(1000);
+            
         }
 
         public static string DeleteOrderNumber()
         {
             wait.waitForObject(() => Element.label_OrderDeleted);
-           // Thread.Sleep(500);
+          
             string OrderDeleted = Element.label_OrderDeleted.Name;        
             char[] _splitchar = { ' ' };
             string[] OrderDeletedArrow = OrderDeleted.Split(_splitchar);
@@ -60,7 +60,7 @@ namespace Flights.Actions
         public static void SetOrderNumber(string value)
         {
             Element.textBox_OrderNumber.SetValue(value);
-            Thread.Sleep(500);
+            Thread.Sleep(500);  //pause to see 
             Logger.Log.Debug("Try search: Order Number - " + value);
         }
 

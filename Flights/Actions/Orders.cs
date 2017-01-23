@@ -61,15 +61,13 @@ namespace Flights.Actions
             string numOfTickets = orderData[5];
 
 
-            Element.cmb_fromCity.Click();
-            Thread.Sleep(1200);  // Pause to see 
+            Element.cmb_fromCity.Click();                    
             foreach (var city in Element.cmb_fromCity.Items) 
             {
                 if (city.Name == fromCity) { city.Select(); }
             }
 
             Element.cmb_toCity.Click();
-            Thread.Sleep(1200);  // Pause to see 
             foreach (var city in Element.cmb_toCity.Items)
             {
                 if (city.Name == toCity) { city.Select(); }
@@ -78,14 +76,12 @@ namespace Flights.Actions
             Element.textBox_Date.SetValue(date);
 
             Element.cmb_class.Click();
-            Thread.Sleep(1000);  // Pause to see
             foreach (var item in Element.cmb_class.Items)
             {
                 if (item.Name == classRate) { item.Select();}
             }
 
             Element.cmb_numOfTickets.Click();
-            Thread.Sleep(1000);  // Pause to see
             foreach (var item in Element.cmb_numOfTickets.Items)
             {
                 if (item.Name == numOfTickets) { item.Select();}
@@ -129,7 +125,6 @@ namespace Flights.Actions
         {
             Element.textBox_PassengerName.SetValue(passenger);
             Element.btn_Order.Click();
-            //Thread.Sleep(1500);
             wait.waitForObject(() => Element.label_OrderCompleted);
             string OrderCompleted = Element.label_OrderCompleted.Name;
             char[] _splitchar = { ' ' };

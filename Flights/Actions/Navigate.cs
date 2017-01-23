@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Diagnostics;
-using System.Threading;
 using Flights.Constants;
 using Flights.Helpers;
 
@@ -98,7 +97,6 @@ namespace Flights.Actions
         {
             Process.Start(AppParam.PATH);
             wait.waitForTrue(() => Element.FlightsMainWindow.IsCurrentlyActive);
-            //Thread.Sleep(2500);
             Logger.Log.Debug("Flight Application is opened");
         }
     }
