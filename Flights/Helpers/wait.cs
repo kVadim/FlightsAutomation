@@ -23,7 +23,7 @@ namespace Flights.Helpers
         }
 
 
-         public static void waitForTrue (Func<bool> method, int cycles = 5, int timeout=500 )
+         public static void waitForTrue (Func<bool> method, int cycles = 5, int timeout=200 )
         {
             bool result = false;
             int count =0;

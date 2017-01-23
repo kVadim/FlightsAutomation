@@ -97,8 +97,8 @@ namespace Flights.Actions
         public static void StartApp()
         {
             Process.Start(AppParam.PATH);
-           // wait.waitForTrue(() => Element.FlightsMainWindow.IsCurrentlyActive);
-            Thread.Sleep(2500);
+            wait.waitForTrue(() => Element.FlightsMainWindow.IsCurrentlyActive);
+            //Thread.Sleep(2500);
             Logger.Log.Debug("Flight Application is opened");
         }
     }

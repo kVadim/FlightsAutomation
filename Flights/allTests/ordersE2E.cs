@@ -11,7 +11,7 @@ namespace Flights
     public class End2End: BaseTest
     {       
         [Test]
-        public void E2E([Values(20)]int iter) //number of orders to be created
+        public void E2E([Values(1)]int iter) //number of orders to be created
         {
             Navigate.OpenBookFlightTab(); 
             List<List<string>> createdOrders = new List<List<string>>();

@@ -2,6 +2,7 @@
 using System.Threading;
 using Flights.Constants;
 using System;
+using Flights.Helpers;
 
 namespace Flights.Actions
 {
@@ -37,13 +38,13 @@ namespace Flights.Actions
             {
                 Logger.Log.Error("Failed to delete", ex);
             }
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
         }
 
         public static string DeleteOrderNumber()
         {
-            // wait.waitForObject(() => Element.label_OrderDeleted);
-            Thread.Sleep(500);
+            wait.waitForObject(() => Element.label_OrderDeleted);
+           // Thread.Sleep(500);
             string OrderDeleted = Element.label_OrderDeleted.Name;        
             char[] _splitchar = { ' ' };
             string[] OrderDeletedArrow = OrderDeleted.Split(_splitchar);

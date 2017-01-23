@@ -6,6 +6,7 @@ using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using Flights.Constants;
 using Flights.Helpers;
+using System.Globalization;
 
 namespace Flights.Actions
 {
@@ -27,8 +28,8 @@ namespace Flights.Actions
                 break;          
             }
             DateTime tomorrow = DateTime.Today.AddDays(1);
-
-            string date = tomorrow.AddDays(rnd.Next(30)).ToString("dd'.'MM'.'yyyy");
+            string sysFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
+            string date = tomorrow.AddDays(rnd.Next(30)).ToString(sysFormat);
             string classRate = classRates[rnd.Next(classRates.Count)];
             string numOfTickets = rnd.Next(1, 99).ToString();
 
@@ -100,10 +101,10 @@ namespace Flights.Actions
             Random rnd = new Random();
             var randomFlight = flights.Rows[rnd.Next(flights.Rows.Count)];           
             randomFlight.Click();
-
+            string sysFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
             string from = Element.fromCity.Name.Substring(6, Element.fromCity.Name.Length - 6);
             string to = Element.toCity.Name.Substring(4, Element.toCity.Name.Length - 4);
-            string date = Convert.ToDateTime(randomFlight.Cells[6].Name).ToString("dd.MM.yyyy");
+            string date = Convert.ToDateTime(randomFlight.Cells[6].Name).ToString(sysFormat);
             string fligthNumber = randomFlight.Cells[7].Name;
 
             List<string> flightData = new List<string>();
@@ -128,8 +129,8 @@ namespace Flights.Actions
         {
             Element.textBox_PassengerName.SetValue(passenger);
             Element.btn_Order.Click();
-            Thread.Sleep(1500);
-           // wait.waitForObject(() => Element.label_OrderCompleted);
+            //Thread.Sleep(1500);
+            wait.waitForObject(() => Element.label_OrderCompleted);
             string OrderCompleted = Element.label_OrderCompleted.Name;
             char[] _splitchar = { ' ' };
             string[] OrderCompletedArrow = OrderCompleted.Split(_splitchar);

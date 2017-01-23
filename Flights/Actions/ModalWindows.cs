@@ -1,4 +1,5 @@
 ﻿using Flights.Constants;
+using Flights.Helpers;
 
 namespace Flights.Actions
 {
@@ -8,6 +9,7 @@ namespace Flights.Actions
         public static bool checkMessageAndClose(string msg)
         {
             Logger.Log.Info("Error message check");
+            wait.waitForObject(() => Element.ErrorMassage);
             bool isMgsCorrect = (msg == Element.ErrorMassage.Name);
             if (!isMgsCorrect)
             {
